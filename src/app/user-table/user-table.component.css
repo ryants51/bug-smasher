@@ -1,0 +1,20 @@
+.full-width-table {
+  width: 100%;
+  font-size: 14pt;
+}
+
+.tableFilter {
+  width: 30%;
+  float: right;
+}
+
+.mat-sort-header-container {
+
+  margin: 0 auto;
+}
+
+mat-header-cell, mat-cell {
+  justify-content: center;
+  font-size: inherit;
+}
+

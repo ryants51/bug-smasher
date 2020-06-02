@@ -1,0 +1,23 @@
+mat-form-field {
+  width: 100%;
+  display: block;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+mat-card {
+  width: 60%;
+  margin: 1rem auto;
+  text-align: center;
+}
+
+.buttonContainer {
+  text-align: center;
+  padding-top: 1rem;
+}
+
+button {
+  width: 30%
+}

@@ -1,0 +1,32 @@
+app-ticket-table {
+  width: 80%;
+}
+
+.mat-divider {
+  border-top-color: rgba(90, 247, 58, 0.12);
+  border-right-color: rgba(90, 247, 58, 0.12);
+}
+
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+

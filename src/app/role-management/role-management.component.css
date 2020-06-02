@@ -1,0 +1,33 @@
+mat-grid-list{
+  width: 100%;
+  height: 90vh !important;
+}
+
+mat-form-field {
+  width:80%;
+  max-width:80%;
+  font-size: 10px;
+}
+
+mat-card {
+  width: 80%;
+  height: 80%;
+  margin: 1rem auto;
+  text-align: center;
+}
+mat-header-row {
+  width: 100%
+}
+
+.userTableCard {
+  height: 90%;
+  width: 95%;
+}
+
+.not-empty-select.mat-selected {
+  color: white !important;
+}
+
+.mat-primary .mat-pseudo-checkbox-checked {
+  background-color: #69f0ae !important;
+}

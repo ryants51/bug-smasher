@@ -1,0 +1,60 @@
+<div class="mat-elevation-z8">
+  <mat-form-field
+    class="tableFilter">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)">
+  </mat-form-field>
+  <br>
+  <br>
+  <mat-table matSort [dataSource]="tableDataSource" class="full-width-table"  aria-label="Users">
+    <!-- Name Column -->
+    <ng-container matColumnDef="projectName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Project Name</mat-header-cell>
+      <mat-cell *matCellDef="let project">{{project.projectName}}</mat-cell>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="projectDescription">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
+      <mat-cell *matCellDef="let project">{{project.projectDescription}}</mat-cell>
+    </ng-container>
+
+    <!-- Creator Column -->
+    <ng-container matColumnDef="projectCreator">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Creator</mat-header-cell>
+      <mat-cell *matCellDef="let project">{{project.projectCreator}}</mat-cell>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>
+      <mat-cell *matCellDef="let project">
+        <mat-list>
+          <mat-list-item>
+            <button mat-button color="accent" [routerLink]="['/myProjects', project.projectID]">Manage users</button>
+            <button mat-button color="accent" (click)="openProject(project)">Project details</button>
+          </mat-list-item>
+         </mat-list>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row
+      *matRowDef="let row; columns: displayedColumns;"
+      [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}"
+      (mouseover)="row.hovered = true"
+      (mouseout)="row.hovered = false"></mat-row>
+  </mat-table>
+
+  <mat-toolbar class="paginator">
+    <mat-toolbar-row>
+      <button mat-button color="accent" (click)="openDialog()">Create new project</button>
+      <span class="spacer"></span>
+      <mat-paginator #paginator
+          [length]="tableDataSource?.data.length"
+          [pageIndex]="0"
+          [pageSize]="10">
+      </mat-paginator>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

@@ -1,0 +1,61 @@
+<div class="">
+  <mat-card>
+    <h1 class="header">Create a new account</h1>
+      <div
+        class="loginForm">
+        <form
+          [formGroup]="registerForm"
+          (submit)="tryRegister(registerForm.value.email, registerForm.value.password)">
+          <mat-form-field>
+            <input
+              matInput
+              type="email"
+              formControlName="email"
+              placeholder="Email">
+            <mat-error *ngIf="registerForm.get('email').invalid">Please enter a valid email.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input
+              matInput
+              type="password"
+              formControlName="password"
+              placeholder="Password">
+            <mat-error *ngIf="registerForm.get('password').invalid">Please enter a valid password.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input
+              matInput
+              type="text"
+              formControlName="displayName"
+              placeholder="Username">
+            <mat-error *ngIf="registerForm.get('displayName').invalid">Please enter a valid username.</mat-error>
+          </mat-form-field>
+
+          <div class="buttonContainer">
+            <button
+              mat-raised-button
+              color="accent"
+              type="submit">Signup</button>
+          </div>
+          <br>
+        </form>
+        <button mat-button style="padding: 1rem;">
+          <mat-icon
+            style="width: 50px; height:30px"
+            svgIcon="facebookLogo"
+            (click)="tryFacebookLogin()"></mat-icon>
+          Signup With Facebook
+        </button>
+        <button mat-button style="padding: 1rem;">
+          <mat-icon
+            style="width: 50px; height:30px"
+            svgIcon="googleLogo"
+            (click)="tryGoogleLogin()"></mat-icon>
+          Signup With Google
+        </button>
+        <p>Already have an account? <a href="/login">Login</a></p>
+      </div>
+  </mat-card>
+</div>

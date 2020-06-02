@@ -1,0 +1,34 @@
+<h1 mat-dialog-title>Please enter the project title and description.</h1>
+<form
+  [formGroup]="projectForm"
+  (submit)="onCreateNewProject()">
+  <div mat-dialog-content>
+    <mat-form-field>
+      <input
+        matInput
+        type="title"
+        formControlName="title"
+        placeholder="Title">
+      <mat-error *ngIf="projectForm.get('title').invalid">Please enter a valid title.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="description"
+        formControlName="description"
+        placeholder="Description">
+      <mat-error *ngIf="projectForm.get('description').invalid">Please enter a valid description.</mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button
+      mat-button
+      color="warn"
+      (click)="onNoClick()">Cancel</button>
+    <button
+      mat-button
+      type="submit"
+      color="accent"
+      cdkFocusInitial>Create new project</button>
+  </div>
+</form>

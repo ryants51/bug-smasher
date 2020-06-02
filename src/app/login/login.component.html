@@ -1,0 +1,74 @@
+<div class="">
+  <mat-card>
+    <h1 class="header">{{isDemo ? 'Select a demo account' : 'Login to your account'}}</h1>
+      <div
+        class="loginForm"
+        *ngIf="!isDemo">
+        <form
+          [formGroup]="loginForm"
+          (submit)="tryLogin(loginForm.value.email, loginForm.value.password)">
+          <mat-form-field>
+            <input
+              matInput
+              type="email"
+              formControlName="email"
+              placeholder="Email">
+            <mat-error *ngIf="loginForm.get('email').invalid">Please enter a valid email.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input
+              matInput
+              type="password"
+              formControlName="password"
+              placeholder="Password">
+            <mat-error *ngIf="loginForm.get('password').invalid">Please enter a valid password.</mat-error>
+          </mat-form-field>
+
+          <div class="buttonContainer">
+            <button
+              mat-raised-button
+              color="accent"
+              type="submit">Login</button>
+          </div>
+          <br>
+        </form>
+        <button
+          mat-button
+          style="padding: 1rem;"
+          (click)="tryFacebookLogin()">
+          <mat-icon
+            style="width: 50px; height:30px"
+            svgIcon="facebookLogo"></mat-icon>
+          Login With Facebook
+        </button>
+        <button
+          mat-button
+          style="padding: 1rem;"
+          (click)="tryGoogleLogin()">
+          <mat-icon
+            style="width: 50px; height:30px"
+            svgIcon="googleLogo"></mat-icon>
+          Login With Google
+        </button>
+        <p>Don't have an account? <a href="/signup">Signup</a></p>
+      </div>
+      <div
+        class="demoLogin"
+        *ngIf="isDemo">
+        <mat-grid-list cols="3" rowHeight="1:1">
+          <mat-grid-tile *ngFor="let userType of userTypes">
+            <mat-card [style.backgroundColor]="'#303030'" style="cursor: pointer;" (click)="tryLogin(userType.userEmail, userType.userPassword)">
+              <mat-icon [svgIcon]="userType.iconName" style="width: 60%; height: 70%" aria-hidden="false" aria-label="Person">{{userType.typeName}}</mat-icon>
+              <mat-toolbar color="primary"><span style="flex: 1 1 auto;">{{userType.typeName}}</span></mat-toolbar>
+            </mat-card>
+          </mat-grid-tile>
+        </mat-grid-list>
+        <br>
+      </div>
+      <button
+        mat-button
+        type="button"
+        (click)="isDemo = !isDemo;">{{(isDemo ? 'Have an account? Sign in' : 'Demo the app')}}</button>
+  </mat-card>
+</div>

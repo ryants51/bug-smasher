@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "bug-smasher-b753f": {
+      "hosting": {
+        "bug-smasher": [
+          "bug-smasher-b753f"
+        ]
+      }
+    }
+  }
+}

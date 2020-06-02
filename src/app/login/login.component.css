@@ -1,0 +1,38 @@
+mat-form-field {
+  width: 100%;
+  display: block;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+mat-card {
+  width: 60%;
+  margin: 1rem auto;
+  text-align: center;
+}
+
+.buttonContainer {
+  text-align: center;
+  padding-top: 1rem;
+}
+
+button {
+  width: 30%
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: green !important;
+ }
+
+ /* ::ng-deep.mat-form-field-underline {
+  /*change color of underline
+  background-color: green !important;
+} */
+
+::ng-deep.mat-form-field-ripple {
+ /*change color of underline when focused*/
+ background-color: green !important;;
+}
