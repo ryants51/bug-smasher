@@ -1,1 +1,38 @@
-<p>project-details works!</p>
+
+<mat-grid-list cols="100" rowHeight="1%">
+  <mat-grid-tile
+      [colspan]="100"
+      [rowspan]="25"
+      [style.background]="'lightpink'">
+      <mat-card>
+        <mat-toolbar color="accent">
+          <mat-toolbar-row>
+            Details for {{!!selectedProject ? selectedProject.projectName : ''}}
+            <div class="spacer"></div>
+            <a mat-button [routerLink]="['/myProjects']">Back to all projects</a> |
+            <button mat-button (click)="editProject()">Edit</button>
+          </mat-toolbar-row>
+          <mat-toolbar-row>
+            Description: {{!!selectedProject ? selectedProject.projectDescription : ''}}
+          </mat-toolbar-row>
+        </mat-toolbar>
+      </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile
+      [colspan]="50"
+      [rowspan]="75"
+      [style.background]="'lightgreen'">
+      <mat-card
+        class="userTableCard">
+      </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile
+      [colspan]="50"
+      [rowspan]="75"
+      [style.background]="'lightblue'">
+      <mat-card>
+      </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+
+

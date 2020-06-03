@@ -50,13 +50,12 @@ export class ProjectsTableComponent implements OnInit, AfterViewInit {
   }
 
   openDialog(): void {
-    console.log('here');
     const dialogRef = this.dialog.open(NewProjectDialogComponent, {
-      width: '500px'
+      width: '500px',
+      data: {name: '', description: '', isEdit: false}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       this.projectsService.createNewProject(result.title, result.description);
     });
   }

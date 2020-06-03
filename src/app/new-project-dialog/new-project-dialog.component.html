@@ -8,7 +8,8 @@
         matInput
         type="title"
         formControlName="title"
-        placeholder="Title">
+        placeholder="Title"
+        [(ngModel)]="data.name">
       <mat-error *ngIf="projectForm.get('title').invalid">Please enter a valid title.</mat-error>
     </mat-form-field>
     <mat-form-field>
@@ -16,7 +17,8 @@
         matInput
         type="description"
         formControlName="description"
-        placeholder="Description">
+        placeholder="Description"
+        [(ngModel)]="data.description">
       <mat-error *ngIf="projectForm.get('description').invalid">Please enter a valid description.</mat-error>
     </mat-form-field>
   </div>
@@ -29,6 +31,6 @@
       mat-button
       type="submit"
       color="accent"
-      cdkFocusInitial>Create new project</button>
+      cdkFocusInitial>{{data.isEdit ? 'Update project' : 'Create new project'}}</button>
   </div>
 </form>

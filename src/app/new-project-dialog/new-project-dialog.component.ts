@@ -3,8 +3,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 export interface DialogData {
-  title: string;
+  name: string;
   description: string;
+  isEdit: boolean;
 }
 
 @Component({
@@ -39,7 +40,7 @@ export class NewProjectDialogComponent implements OnInit {
   }
 
   onCreateNewProject() {
-    if(!this.projectForm.invalid) {
+    if (!this.projectForm.invalid) {
       this.dialogRef.close(this.projectForm.value);
     }
   }

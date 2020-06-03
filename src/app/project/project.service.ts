@@ -5,6 +5,7 @@ import { Project } from './project.model';
 import { UserService } from '../user/user.service';
 import { AuthService } from '../auth/auth.service';
 import { User } from '../user/user.model';
+import { firestore } from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +42,12 @@ export class ProjectsService {
       tickets: []
     };
     this.afStore.collection('projects').add(newProject);
+  }
+
+  editProject(projectID: string, title: string, description: string) {
+    firestore().collection('projects').doc(projectID).update({
+      projectName: title,
+      projectDescription: description
+    });
   }
 }
