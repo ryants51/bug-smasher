@@ -1,8 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { User } from '../user/user.model';
-import { Observable } from 'rxjs';
 import { UserService } from '../user/user.service';
 
 @Component({

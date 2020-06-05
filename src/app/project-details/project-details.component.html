@@ -24,6 +24,10 @@
       [style.background]="'lightgreen'">
       <mat-card
         class="userTableCard">
+        <mat-toolbar color="accent">Users assigned to this project</mat-toolbar>
+        <app-project-users-table
+          [selectedProject]="selectedProject"
+          [selectedProjectID]="selectedProjectID"></app-project-users-table>
       </mat-card>
   </mat-grid-tile>
   <mat-grid-tile

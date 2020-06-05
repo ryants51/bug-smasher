@@ -8,9 +8,7 @@ import { ProjectsService } from '../project/project.service';
 import { NewProjectDialogComponent } from '../new-project-dialog/new-project-dialog.component';
 import { Project } from '../project/project.model';
 import { AuthService } from '../auth/auth.service';
-import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
-import { User, firestore } from 'firebase';
-import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-projects-table',
@@ -36,8 +34,6 @@ export class ProjectsTableComponent implements OnInit, AfterViewInit {
   ngOnInit() {}
 
   ngAfterViewInit() {
-    console.log('something');
-
     this.authService.getUser().subscribe((user) => {
       if (user != null) {
         this.projectsService.allProjects.subscribe((projects) => {

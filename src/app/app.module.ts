@@ -27,6 +27,7 @@ import { ProjectsTableComponent } from './projects-table/projects-table.componen
 import { NewProjectDialogComponent } from './new-project-dialog/new-project-dialog.component';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
+import { ProjectUsersTableComponent } from './project-users-table/project-users-table.component';
 
 firebase.initializeApp(environment.firebase);
 
@@ -41,7 +42,8 @@ firebase.initializeApp(environment.firebase);
     MyProjectsComponent,
     ProjectsTableComponent,
     NewProjectDialogComponent,
-    ProjectDetailsComponent
+    ProjectDetailsComponent,
+    ProjectUsersTableComponent
   ],
   imports: [
     BrowserModule,

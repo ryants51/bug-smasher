@@ -1,0 +1,55 @@
+<div class="mat-elevation-z8">
+  <mat-form-field
+    class="tableFilter">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)">
+  </mat-form-field>
+  <br>
+  <br>
+  <mat-table matSort [dataSource]="tableDataSource" class="full-width-table"  aria-label="Users">
+    <!-- Name Column -->
+    <ng-container matColumnDef="displayName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>User Name</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{user.displayName}}</mat-cell>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{user.email}}</mat-cell>
+    </ng-container>
+
+    <!-- Role Column -->
+    <ng-container matColumnDef="role">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Role</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{user.role}}</mat-cell>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <button mat-button color="accent" (click)="removeUserFromProject(user)">Remove user</button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row
+      *matRowDef="let row; columns: displayedColumns;"
+      [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}"
+      (mouseover)="row.hovered = true"
+      (mouseout)="row.hovered = false"></mat-row>
+  </mat-table>
+
+  <mat-toolbar class="paginator">
+    <mat-toolbar-row>
+      <button mat-button color="accent" (click)="addUserToProject()">Add user to project</button>
+      <span class="spacer"></span>
+      <mat-paginator #paginator
+          [length]="tableDataSource?.data.length"
+          [pageIndex]="0"
+          [pageSize]="10">
+      </mat-paginator>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

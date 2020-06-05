@@ -1,12 +1,9 @@
-import { Component, OnInit, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { firestore } from 'firebase';
-import { Project } from '../project/project.model';
 import { NewProjectDialogComponent } from '../new-project-dialog/new-project-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ProjectsService } from '../project/project.service';
-import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore/';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-project-details',
@@ -14,15 +11,13 @@ import { Observable } from 'rxjs';
   styleUrls: ['./project-details.component.css']
 })
 export class ProjectDetailsComponent implements OnInit {
-  projectSnapshot;
   selectedProject;
   selectedProjectID: string;
-  projectUsers = [];
 
   constructor(
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    private projectsService: ProjectsService
+    private projectsService: ProjectsService,
   ) { }
 
   ngOnInit() {
@@ -31,11 +26,7 @@ export class ProjectDetailsComponent implements OnInit {
 
       firestore().collection('projects').doc(this.selectedProjectID).onSnapshot(async (doc) => {
           this.selectedProject = doc.data();
-
-          for (const assignedUserID of this.selectedProject.assignedUsers) {
-            const assignedUsers = await firestore().collection('users').doc(assignedUserID).get();
-            this.projectUsers.push(assignedUsers.data());
-          }
+          console.log(this.selectedProject);
       });
     });
   }
