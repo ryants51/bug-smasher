@@ -1,8 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild, Input, OnChanges } from '@angular/core';
-import { MatTableDataSource, MatTable } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { UserTableItem } from '../user-table/user-table.component';
 import { ProjectsService } from '../project/project.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
@@ -21,15 +20,13 @@ export class ProjectUsersTableComponent implements OnInit, AfterViewInit, OnChan
   selectedProjectUsers: Observable<User[]>;
   selectedUsersCollection: AngularFirestoreCollection<User>;
 
-  displayedColumns = ['displayName', 'email', 'role', 'actions'];
+  displayedColumns = ['displayName', 'email', 'role'];
   tableDataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatTable) table: MatTable<UserTableItem>;
 
   constructor(
-    public projectsService: ProjectsService,
     public dialog: MatDialog,
     public afStore: AngularFirestore
   ) {}
@@ -54,16 +51,8 @@ export class ProjectUsersTableComponent implements OnInit, AfterViewInit, OnChan
     }
   }
 
-  addUserToProject(): void {
-    console.log('adding');
-  }
-
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.tableDataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  async removeUserFromProject(user) {
-    console.log(user);
   }
 }

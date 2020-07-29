@@ -8,6 +8,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RoleManagementComponent } from './role-management/role-management.component';
 import { MyProjectsComponent } from './my-projects/my-projects.component';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
+import { TicketDetailsComponent } from './ticket-details/ticket-details.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'roleManagement', component: RoleManagementComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'myProjects', component: MyProjectsComponent, canActivate: [AuthGuard] },
   { path: 'myProjects/:projectID', component: ProjectDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'tickets/:ticketID', component: TicketDetailsComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'login' }
 ];
 

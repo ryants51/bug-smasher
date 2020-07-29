@@ -34,6 +34,7 @@ export class ProjectDetailsComponent implements OnInit {
   editProject() {
     const dialogRef = this.dialog.open(NewProjectDialogComponent, {
       width: '500px',
+      hasBackdrop: true,
       data: {
         name: this.selectedProject.projectName,
         description: this.selectedProject.projectDescription,

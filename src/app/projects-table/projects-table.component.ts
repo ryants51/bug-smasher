@@ -48,6 +48,7 @@ export class ProjectsTableComponent implements OnInit, AfterViewInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(NewProjectDialogComponent, {
       width: '500px',
+      hasBackdrop: true,
       data: {name: '', description: '', isEdit: false}
     });
 

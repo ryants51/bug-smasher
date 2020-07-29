@@ -28,6 +28,9 @@ import { NewProjectDialogComponent } from './new-project-dialog/new-project-dial
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { ProjectUsersTableComponent } from './project-users-table/project-users-table.component';
+import { ProjectTicketsTableComponent } from './project-tickets-table/project-tickets-table.component';
+import { NewTicketDialogComponent } from './new-ticket-dialog/new-ticket-dialog.component';
+import { TicketDetailsComponent } from './ticket-details/ticket-details.component';
 
 firebase.initializeApp(environment.firebase);
 
@@ -43,7 +46,10 @@ firebase.initializeApp(environment.firebase);
     ProjectsTableComponent,
     NewProjectDialogComponent,
     ProjectDetailsComponent,
-    ProjectUsersTableComponent
+    ProjectUsersTableComponent,
+    ProjectTicketsTableComponent,
+    NewTicketDialogComponent,
+    TicketDetailsComponent
   ],
   imports: [
     BrowserModule,

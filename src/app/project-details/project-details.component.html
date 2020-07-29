@@ -35,6 +35,10 @@
       [rowspan]="75"
       [style.background]="'lightblue'">
       <mat-card>
+        <mat-toolbar color="accent">Tickets in this project</mat-toolbar>
+        <app-project-tickets-table
+        [selectedProject]="selectedProject"
+        [selectedProjectID]="selectedProjectID"></app-project-tickets-table>
       </mat-card>
   </mat-grid-tile>
 </mat-grid-list>

@@ -1,0 +1,68 @@
+<div class="mat-elevation-z8">
+  <mat-form-field
+    class="tableFilter">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)">
+  </mat-form-field>
+  <br>
+  <br>
+  <mat-table matSort [dataSource]="tableDataSource" class="full-width-table"  aria-label="tickets">
+    <!-- Title Column -->
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+      <mat-cell *matCellDef="let ticket">{{ticket.title}}</mat-cell>
+    </ng-container>
+
+    <!-- Creator Column -->
+    <ng-container matColumnDef="creator">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Creator</mat-header-cell>
+      <mat-cell *matCellDef="let ticket">{{ticket.creator}}</mat-cell>
+    </ng-container>
+
+    <!-- Developer Column -->
+    <ng-container matColumnDef="developer">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Developer</mat-header-cell>
+      <mat-cell *matCellDef="let ticket">{{ticket.assignedUser}}</mat-cell>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+      <mat-cell *matCellDef="let ticket">{{ticket.status}}</mat-cell>
+    </ng-container>
+
+    <!-- Created on Column -->
+    <ng-container matColumnDef="dateCreated">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Created</mat-header-cell>
+      <mat-cell *matCellDef="let ticket">{{ticket.dateCreated.toDate() | date: 'dd MMM hh:mm' }}</mat-cell>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>
+      <mat-cell *matCellDef="let ticket">
+        <button mat-button color="accent" [routerLink]="['/tickets', ticket.uid]">Edit</button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row
+      *matRowDef="let row; columns: displayedColumns;"
+      [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}"
+      (mouseover)="row.hovered = true"
+      (mouseout)="row.hovered = false"
+      (click)="openTicket(row)"></mat-row>
+  </mat-table>
+
+  <mat-toolbar class="paginator">
+    <mat-toolbar-row>
+      <button mat-button color="accent" (click)="openDialog()">Add ticket to project</button>
+      <span class="spacer"></span>
+      <mat-paginator #paginator
+          [length]="tableDataSource?.data.length"
+          [pageIndex]="0"
+          [pageSize]="6">
+      </mat-paginator>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

@@ -1,0 +1,30 @@
+.full-width-table {
+  width: 100%;
+}
+
+.tableFilter {
+  width: 30%;
+  float: right;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.mat-sort-header-container {
+  margin: 0 auto;
+}
+
+mat-header-cell, mat-cell {
+  justify-content: center;
+  font-size: inherit;
+}
+
+mat-header-row {
+  margin: 0px;
+  width: 100%;
+}
+
+.paginator {
+  background-color: #424242;
+}

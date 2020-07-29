@@ -1,0 +1,87 @@
+<h1 mat-dialog-title>Please enter the following ticket info.</h1>
+<form
+  [formGroup]="projectForm"
+  (submit)="onCreateNewProject()">
+  <div mat-dialog-content>
+    <mat-form-field color="accent">
+      <input
+        matInput
+        type="title"
+        formControlName="title"
+        placeholder="Title"
+        [(ngModel)]="data.title">
+      <mat-error *ngIf="projectForm.get('title').invalid">Please enter a valid title.</mat-error>
+    </mat-form-field>
+    <br/>
+    <mat-form-field color="accent">
+      <input
+        matInput
+        type="description"
+        formControlName="description"
+        placeholder="Description"
+        [(ngModel)]="data.description">
+      <mat-error *ngIf="projectForm.get('description').invalid">Please enter a valid description.</mat-error>
+    </mat-form-field>
+    <br/>
+    <mat-form-field color="accent">
+      <mat-label>Priority</mat-label>
+      <mat-select
+        formControlName="priority">
+        <mat-option
+          value="Low"
+          class="not-empty-select">Low</mat-option>
+        <mat-option
+          value="Medium"
+          class="not-empty-select">Medium</mat-option>
+        <mat-option
+          value="High"
+          class="not-empty-select">High</mat-option>
+      </mat-select>
+      <mat-error *ngIf="projectForm.get('priority').invalid">Please enter a valid priority.</mat-error>
+    </mat-form-field>
+    <br/>
+    <mat-form-field color="accent">
+        <mat-label>Type</mat-label>
+        <mat-select
+          formControlName="type">
+          <mat-option
+            value="Bugs/Errors"
+            class="not-empty-select">Bugs/Errors</mat-option>
+          <mat-option
+            value="Feature Requests"
+            class="not-empty-select">Feature Requests</mat-option>
+          <mat-option
+            value="Other"
+            class="not-empty-select">Other</mat-option>
+          <mat-option
+            value="Training/Documentation"
+            class="not-empty-select">Training/Documentation</mat-option>
+        </mat-select>
+      <mat-error *ngIf="projectForm.get('type').invalid">Please enter a valid type.</mat-error>
+    </mat-form-field>
+    <br/>
+    <mat-form-field color="accent">
+      <mat-label>Assign User</mat-label>
+      <mat-select
+        formControlName="assignedUser">
+        <mat-option
+          *ngFor="let user of usersService.allUsers | async"
+          [value]="user.uid"
+          class="not-empty-select">{{user.displayName}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="projectForm.get('priority').invalid">Please enter a valid priority.</mat-error>
+    </mat-form-field>
+    <br/>
+  </div>
+  <div mat-dialog-actions>
+    <button
+      mat-button
+      color="warn"
+      (click)="onNoClick()">Cancel</button>
+    <button
+      mat-button
+      type="submit"
+      color="accent"
+      cdkFocusInitial>Create new ticket</button>
+  </div>
+</form>
