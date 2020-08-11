@@ -43,20 +43,21 @@ export class ProjectTicketsTableComponent implements OnInit, AfterViewInit, OnCh
   ngOnChanges() {
     if (!!this.selectedProject) {
       this.selectedTicketsCollection = this.afStore.collection('tickets', ref => {
-        return ref.where('uid', 'in', this.selectedProject.tickets).where('status', '==', 'Open');
+        return ref.where('uid', 'in', this.selectedProject.tickets);
       });
 
       this.selectedProjectTickets = this.selectedTicketsCollection.valueChanges();
-      this.selectedProjectTickets.subscribe((tickets) => {
+      this.selectedProjectTickets.subscribe(async (tickets) => {
+        const filteredTickets = tickets.filter((ticket) => ticket.status !== 'Resolved');
+
         // tslint:disable-next-line: prefer-const
-        console.log(tickets);
-        for (let ticket of tickets) {
-          this.afStore.doc(`users/${ticket.assignedUser}`).ref.get().then((doc) => {
+        for (let ticket of filteredTickets) {
+          await this.afStore.doc(`users/${ticket.assignedUser}`).ref.get().then((doc) => {
             ticket.assignedUser = doc.exists ? doc.data().displayName : 'Unknown user';
           });
         }
 
-        this.tableDataSource = new MatTableDataSource(tickets);
+        this.tableDataSource = new MatTableDataSource(filteredTickets);
         this.tableDataSource.sort = this.sort;
         this.tableDataSource.paginator = this.paginator;
       });
@@ -76,15 +77,8 @@ export class ProjectTicketsTableComponent implements OnInit, AfterViewInit, OnCh
       data: {title: '', description: '', priority: '', type: ''}
     });
 
-    const parentProject = this.afStore.collection('projects').doc(this.selectedProjectID);
-
     dialogRef.afterClosed().subscribe(({title, description, priority, type, assignedUser}) => {
       this.ticketService.createNewTicket(title, description, priority, type, this.selectedProjectID, assignedUser);
     });
   }
-
-  openTicket(ticket) {
-    console.log(ticket);
-  }
-
 }

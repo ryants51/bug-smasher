@@ -26,7 +26,6 @@ export class ProjectDetailsComponent implements OnInit {
 
       firestore().collection('projects').doc(this.selectedProjectID).onSnapshot(async (doc) => {
           this.selectedProject = doc.data();
-          console.log(this.selectedProject);
       });
     });
   }

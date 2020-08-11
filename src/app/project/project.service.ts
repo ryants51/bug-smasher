@@ -22,9 +22,7 @@ export class ProjectsService {
     this.authService.getUser().subscribe((user) => {
       if (user != null) {
         this.loggedInUser = user;
-        this.projectsCollection = this.afStore.collection('projects', ref => {
-          return ref.where('assignedUsers', 'array-contains', this.loggedInUser.uid).orderBy('projectName');
-        });
+        this.projectsCollection = this.afStore.collection('projects');
         this.allProjects = this.projectsCollection.valueChanges({idField: 'projectID'});
       }
     });
@@ -32,9 +30,6 @@ export class ProjectsService {
 
   createNewProject(title: string, description: string) {
     const newProject: Project = {
-      assignedUsers: [
-        this.loggedInUser.uid
-      ],
       projectCreator: this.loggedInUser.displayName,
       projectDescription: description,
       projectName: title,

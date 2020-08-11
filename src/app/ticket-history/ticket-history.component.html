@@ -1,0 +1,53 @@
+<div class="mat-elevation-z8">
+  <mat-form-field
+    class="tableFilter">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)">
+  </mat-form-field>
+  <br>
+  <br>
+  <br>
+  <mat-table matSort [dataSource]="tableDataSource" class="full-width-table"  aria-label="History">
+    <!-- Property Column -->
+    <ng-container matColumnDef="property">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Property</mat-header-cell>
+      <mat-cell *matCellDef="let history">{{history.propertyChanged.charAt(0).toUpperCase() + history.propertyChanged.slice(1)}}</mat-cell>
+    </ng-container>
+
+    <!-- Old Value Column -->
+    <ng-container matColumnDef="oldValue">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Old Value</mat-header-cell>
+      <mat-cell *matCellDef="let history">{{history.oldValue}}</mat-cell>
+    </ng-container>
+
+    <!-- Creator Column -->
+    <ng-container matColumnDef="newValue">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>New Value</mat-header-cell>
+      <mat-cell *matCellDef="let history">{{history.newValue}}</mat-cell>
+    </ng-container>
+
+    <!-- Date Changed Column -->
+    <ng-container matColumnDef="dateChanged">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Date Changed</mat-header-cell>
+      <mat-cell *matCellDef="let history">{{history.dateChanged.toDate() | date: 'yyyy-MM-dd'}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row
+      *matRowDef="let row; columns: displayedColumns;"
+      [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}"
+      (mouseover)="row.hovered = true"
+      (mouseout)="row.hovered = false"></mat-row>
+  </mat-table>
+
+  <mat-toolbar class="paginator">
+    <mat-toolbar-row>
+      <span class="spacer"></span>
+      <mat-paginator #paginator
+          [length]="tableDataSource?.data.length"
+          [pageIndex]="0"
+          [pageSize]="5">
+      </mat-paginator>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

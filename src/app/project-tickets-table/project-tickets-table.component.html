@@ -50,8 +50,7 @@
       *matRowDef="let row; columns: displayedColumns;"
       [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}"
       (mouseover)="row.hovered = true"
-      (mouseout)="row.hovered = false"
-      (click)="openTicket(row)"></mat-row>
+      (mouseout)="row.hovered = false"></mat-row>
   </mat-table>
 
   <mat-toolbar class="paginator">

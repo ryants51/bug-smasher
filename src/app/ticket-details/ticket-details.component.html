@@ -1,1 +1,223 @@
-<p>ticket-details works!</p>
+
+<mat-grid-list cols="100" rowHeight="1%">
+  <mat-grid-tile
+      [colspan]="50"
+      [rowspan]="75"
+      [style.background]="'lightblue'">
+      <mat-card>
+        <mat-toolbar color="accent">
+          <mat-toolbar-row>
+            Details for ticket - {{this.originalTicket.title}}
+          </mat-toolbar-row>
+        </mat-toolbar>
+
+        <form
+          [formGroup]="ticketForm"
+          (submit)="updateTicketDetails()">
+          <div>
+            <mat-grid-list
+              cols="100"
+              rowHeight="1%">
+              <mat-grid-tile
+                [colspan]="50"
+                [rowspan]="10">
+                <mat-form-field
+                  color="accent">
+                  <input
+                    matInput
+                    type="title"
+                    formControlName="title"
+                    placeholder="Title"
+                    [(ngModel)]="this.selectedTicket.title">
+                  <mat-error *ngIf="ticketForm.get('title').invalid">Please enter a valid title.</mat-error>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile
+                [colspan]="50"
+                [rowspan]="10">
+                <mat-form-field
+                  color="accent">
+                  <input
+                    matInput
+                    type="description"
+                    formControlName="description"
+                    placeholder="Description"
+                    [(ngModel)]="this.selectedTicket.description">
+                  <mat-error *ngIf="ticketForm.get('description').invalid">Please enter a valid description.</mat-error>
+                </mat-form-field>
+              </mat-grid-tile>
+
+              <mat-grid-tile
+                [colspan]="50"
+                [rowspan]="10">
+                <mat-form-field
+                  color="accent">
+                  <mat-label>Priority</mat-label>
+                  <mat-select
+                    formControlName="priority"
+                    [(ngModel)]="this.selectedTicket.priority">
+                    <mat-option
+                      value="Low"
+                      class="not-empty-select">Low</mat-option>
+                    <mat-option
+                      value="Medium"
+                      class="not-empty-select">Medium</mat-option>
+                    <mat-option
+                      value="High"
+                      class="not-empty-select">High</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="ticketForm.get('priority').invalid">Please enter a valid priority.</mat-error>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile
+                [colspan]="50"
+                [rowspan]="10">
+                <mat-form-field
+                  color="accent">
+                    <mat-label>Type</mat-label>
+                    <mat-select
+                      formControlName="type"
+                      [(ngModel)]="this.selectedTicket.type">
+                      <mat-option
+                        value="Bugs/Errors"
+                        class="not-empty-select">Bugs/Errors</mat-option>
+                      <mat-option
+                        value="Feature Requests"
+                        class="not-empty-select">Feature Requests</mat-option>
+                      <mat-option
+                        value="Other"
+                        class="not-empty-select">Other</mat-option>
+                      <mat-option
+                        value="Training/Documentation"
+                        class="not-empty-select">Training/Documentation</mat-option>
+                    </mat-select>
+                  <mat-error *ngIf="ticketForm.get('type').invalid">Please enter a valid type.</mat-error>
+                </mat-form-field>
+              </mat-grid-tile>
+
+              <mat-grid-tile
+                [colspan]="50"
+                [rowspan]="10">
+                <mat-form-field
+                  color="accent">
+                  <mat-label>Status</mat-label>
+                  <mat-select
+                    formControlName="status"
+                    [(ngModel)]="this.selectedTicket.status">
+                    <mat-option
+                      value="Open"
+                      class="not-empty-select">Open</mat-option>
+                    <mat-option
+                      value="In Progress"
+                      class="not-empty-select">In Progress</mat-option>
+                    <mat-option
+                      value="Resolved"
+                      class="not-empty-select">Resolved</mat-option>
+                    <mat-option
+                      value="Additional Info Needed"
+                      class="not-empty-select">Additional Info Needed</mat-option>
+                  </mat-select>
+                <mat-error *ngIf="ticketForm.get('status').invalid">Please enter a valid status.</mat-error>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile
+                [colspan]="50"
+                [rowspan]="10">
+                <mat-form-field
+                  color="accent">
+                  <mat-label>Assigned User</mat-label>
+                  <mat-select
+                    formControlName="assignedUser"
+                    [(ngModel)]="this.selectedTicket.assignedUser">
+                    <mat-option
+                      *ngFor="let user of usersService.allUsers | async"
+                      [value]="user.uid"
+                      class="not-empty-select">{{user.displayName}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="ticketForm.get('priority').invalid">Please enter a valid priority.</mat-error>
+                </mat-form-field>
+              </mat-grid-tile>
+
+              <mat-grid-tile
+                [colspan]="50"
+                [rowspan]="10">
+                <mat-form-field>
+                  <mat-label>Date Created</mat-label>
+                  <input matInput disabled [value]="this.selectedTicket.dateCreated.toDate() | date: 'yyyy-MM-dd'">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile
+                [colspan]="50"
+                [rowspan]="10">
+                <mat-form-field>
+                  <mat-label>Last Updated</mat-label>
+                  <input matInput disabled [value]="this.selectedTicket.lastUpdated.toDate() | date: 'yyyy-MM-dd'">
+                </mat-form-field>
+              </mat-grid-tile>
+
+              <mat-grid-tile
+                [colspan]="50"
+                [rowspan]="10">
+                <mat-form-field>
+                  <mat-label>Ticket Creator</mat-label>
+                  <input matInput disabled [value]="this.selectedTicket.creator">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile
+                [colspan]="50"
+                [rowspan]="10">
+                <mat-form-field>
+                  <mat-label>Parent Project</mat-label>
+                  <input matInput disabled [value]="this.projectName">
+                </mat-form-field>
+              </mat-grid-tile>
+
+              <mat-grid-tile
+                [colspan]="100"
+                [rowspan]="5">
+                <button
+                  mat-button
+                  type="submit"
+                  color="accent"
+                  cdkFocusInitial>Update</button>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </div>
+        </form>
+      </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile
+      [colspan]="50"
+      [rowspan]="75"
+      [style.background]="'lightgreen'">
+      <mat-card>
+        <mat-toolbar color="accent">Tickets Comments</mat-toolbar>
+        <app-ticket-comments></app-ticket-comments>
+      </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile
+      [colspan]="50"
+      [rowspan]="80"
+      [style.background]="'lightgreen'">
+      <mat-card
+        class="userTableCard">
+        <mat-toolbar color="accent">Ticket Attachments</mat-toolbar>
+        <!-- <app-project-users-table
+          [selectedProject]="selectedProject"
+          [selectedProjectID]="selectedProjectID"></app-project-users-table> -->
+      </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile
+      [colspan]="50"
+      [rowspan]="80"
+      [style.background]="'lightpink'">
+      <mat-card>
+        <mat-toolbar color="accent">Ticket History</mat-toolbar>
+        <app-ticket-history
+          [ticketID]="selectedTicketID">
+        </app-ticket-history>
+      </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+
+

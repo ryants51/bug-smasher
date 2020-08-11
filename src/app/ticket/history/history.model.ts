@@ -1,7 +1,8 @@
 export interface History {
-  uid: string;
-  dateChanged: string;
+  id: string;
+  dateChanged: Date;
   newValue: string;
   oldValue: string;
   propertyChanged: string;
+  changedBy: string;
 }

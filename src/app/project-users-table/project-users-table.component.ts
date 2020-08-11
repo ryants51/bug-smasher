@@ -8,6 +8,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Project } from '../project/project.model';
 import { Observable } from 'rxjs';
 import { User } from 'firebase';
+import { Ticket } from '../ticket/ticket.model';
 
 @Component({
   selector: 'app-project-users-table',
@@ -19,6 +20,9 @@ export class ProjectUsersTableComponent implements OnInit, AfterViewInit, OnChan
   @Input() selectedProjectID: string;
   selectedProjectUsers: Observable<User[]>;
   selectedUsersCollection: AngularFirestoreCollection<User>;
+
+  projectTicketCollection: AngularFirestoreCollection<Ticket>;
+  selectedProjectTickets: Observable<Ticket[]>;
 
   displayedColumns = ['displayName', 'email', 'role'];
   tableDataSource: MatTableDataSource<any>;
@@ -38,15 +42,24 @@ export class ProjectUsersTableComponent implements OnInit, AfterViewInit, OnChan
 
   ngOnChanges() {
     if (!!this.selectedProject) {
-      this.selectedUsersCollection = this.afStore.collection('users', ref => {
-        return ref.where('uid', 'in', this.selectedProject.assignedUsers);
+      this.projectTicketCollection = this.afStore.collection('tickets', ref => {
+        return ref.where('uid', 'in', this.selectedProject.tickets);
       });
 
-      this.selectedProjectUsers = this.selectedUsersCollection.valueChanges();
-      this.selectedProjectUsers.subscribe((users) => {
-        this.tableDataSource = new MatTableDataSource(users);
-        this.tableDataSource.sort = this.sort;
-        this.tableDataSource.paginator = this.paginator;
+      this.selectedProjectTickets = this.projectTicketCollection.valueChanges();
+      this.selectedProjectTickets.subscribe((tickets) => {
+        const projectUsers = tickets.map(ticket => ticket.assignedUser);
+
+        this.selectedUsersCollection = this.afStore.collection('users', ref => {
+          return ref.where('uid', 'in', projectUsers);
+        });
+
+        this.selectedProjectUsers = this.selectedUsersCollection.valueChanges();
+        this.selectedProjectUsers.subscribe((users) => {
+          this.tableDataSource = new MatTableDataSource(users);
+          this.tableDataSource.sort = this.sort;
+          this.tableDataSource.paginator = this.paginator;
+        });
       });
     }
   }

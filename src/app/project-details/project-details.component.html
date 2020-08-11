@@ -2,8 +2,7 @@
 <mat-grid-list cols="100" rowHeight="1%">
   <mat-grid-tile
       [colspan]="100"
-      [rowspan]="25"
-      [style.background]="'lightpink'">
+      [rowspan]="25">
       <mat-card>
         <mat-toolbar color="accent">
           <mat-toolbar-row>
@@ -20,8 +19,7 @@
   </mat-grid-tile>
   <mat-grid-tile
       [colspan]="50"
-      [rowspan]="75"
-      [style.background]="'lightgreen'">
+      [rowspan]="75">
       <mat-card
         class="userTableCard">
         <mat-toolbar color="accent">Users assigned to this project</mat-toolbar>
@@ -32,8 +30,7 @@
   </mat-grid-tile>
   <mat-grid-tile
       [colspan]="50"
-      [rowspan]="75"
-      [style.background]="'lightblue'">
+      [rowspan]="75">
       <mat-card>
         <mat-toolbar color="accent">Tickets in this project</mat-toolbar>
         <app-project-tickets-table

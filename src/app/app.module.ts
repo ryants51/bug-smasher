@@ -31,6 +31,8 @@ import { ProjectUsersTableComponent } from './project-users-table/project-users-
 import { ProjectTicketsTableComponent } from './project-tickets-table/project-tickets-table.component';
 import { NewTicketDialogComponent } from './new-ticket-dialog/new-ticket-dialog.component';
 import { TicketDetailsComponent } from './ticket-details/ticket-details.component';
+import { TicketHistoryComponent } from './ticket-history/ticket-history.component';
+import { TicketCommentsComponent } from './ticket-comments/ticket-comments.component';
 
 firebase.initializeApp(environment.firebase);
 
@@ -49,7 +51,9 @@ firebase.initializeApp(environment.firebase);
     ProjectUsersTableComponent,
     ProjectTicketsTableComponent,
     NewTicketDialogComponent,
-    TicketDetailsComponent
+    TicketDetailsComponent,
+    TicketHistoryComponent,
+    TicketCommentsComponent
   ],
   imports: [
     BrowserModule,
